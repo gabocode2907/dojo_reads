@@ -1,0 +1,17 @@
+h1 {
+    font-weight: bold;
+    color: cadetblue;
+}
+
+input {
+    border-radius: 4px;
+    margin: 5px;
+}
+
+button {
+    padding: 5px;
+    width: 20%;
+    border-radius: 12px;
+    background-color: black;
+    color: white;
+}
