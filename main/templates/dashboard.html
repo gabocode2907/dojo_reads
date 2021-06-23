@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+</head>
+<body>
+    <h1>WELCOME {{logged_user.name}}</h1>
+
+    <!-- TO DO CREAR HTML BOOKS -->
+    
+    <a href="/book/book_form">Create new book and add a review</a>
+    <br>
+    <h2>Recent reviews: </h2>
+    {% for review in recent_reviews %}
+    <h3><a href="/book/{{review.book_reviewed.id}}">{{review.book_reviewed.title}}</a></h3>
+    <br>
+    <p>Rating: {{review.rating}}</p>
+    <br>
+    <h4><a href="/book/{{review.user_review.id}}">{{review.user_review.name}}</a> Says: {{review.content}}</h4>
+    <br>
+    <p>Posted on: {{review.created_at}}</p>
+    {% endfor %}
+    <hr>
+    <h3>All books</h3>
+    <ul>
+        {% for book in all_books %}
+            {% if book.book_reviews.all|length > 0 %}
+            <li>
+                {{book.title}}
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+</html>

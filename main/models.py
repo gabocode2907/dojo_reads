@@ -1,7 +1,9 @@
 from django.db import models
 import re
 
-# Create your models here.
+from django.db.models.base import Model
+
+# VALIDATIONS
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.+_-]+\.[a-zA-Z]+$')
 
@@ -24,11 +26,36 @@ class UserManager(models.Manager):
             errors['pw_match'] = "Password must match!"
         return errors       
 
+
+
+# MODELS CREATION
 class User(models.Model):
     name = models.CharField(max_length=50)
     alias = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = UserManager()
+
+class Book(models.Model):
+    title = models.CharField(max_length=150)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = UserManager()
+
+class Author(models.Model):
+    name = models.CharField(max_length=75)
+    books = models.ManyToManyField(Book, related_name="authors")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = UserManager()
+
+class Review(models.Model):
+    content = models.TextField()
+    rating = models.IntegerField()
+    user_review = models.ForeignKey(User, related_name="user_reviews", on_delete=models.CASCADE)
+    book_reviewed = models.ForeignKey(Book, related_name="book_reviews", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
