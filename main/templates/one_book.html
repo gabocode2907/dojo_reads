@@ -10,7 +10,7 @@
     <h1>{{book.title}}</h1>
     <ul>
         {% for author in book.authors.all %}
-        <li>{{auhor.name}} </li>
+        <li>{{author.name}} </li>
         {% endfor %}
     </ul>
     <br>
@@ -18,7 +18,7 @@
     <h2>Review:</h2>
     {% for review in book.book_reviews.all %}
         <hr>
-        <p>Raiting: {{review.raiting}}</p>
+        <p>Raiting: {{review.rating}}</p>
         <p>Review Author: <a href="/user/{{review.user_review.id}}">{{review.user_review.name}}</a></p>
         <p>Posted at: {{review.created_at}}</p>
         {% if review.user_review.id == request.session.logged_user %}
@@ -29,13 +29,13 @@
 
     <!-- ADD REVIEW FOR ACTUAL BOOK -->
     <h2>Add a review</h2>
-    <form action="/book/add_review" method="psot">
+    <form action="/book/add_review" method="POST">
         {% csrf_token %}
         <label for="content">Review: </label>
         <textarea name="content" cols="20" rows="3"></textarea>
         <br>
-
-        <label for="raiting">Rating:</label>
+        <input type="hidden" name="this_book" value="{{book.id}}">
+        <label for="rating">Rating:</label>
         <select name="rating">
             <option value="1">1 Star</option>
             <option value="2">2 Star</option>
@@ -44,7 +44,7 @@
             <option value="5">5 Star</option>
         </select>
         <br>
-        <button>Create Book</button>
+        <button>Add Review</button>
     </form>
 </body>
 </html>

@@ -19,7 +19,7 @@
     <br>
     <p>Rating: {{review.rating}}</p>
     <br>
-    <h4><a href="/book/{{review.user_review.id}}">{{review.user_review.name}}</a> Says: {{review.content}}</h4>
+    <h4><a href="/user/{{review.user_review.id}}">{{review.user_review.name}}</a> Says: {{review.content}}</h4>
     <br>
     <p>Posted on: {{review.created_at}}</p>
     {% endfor %}
