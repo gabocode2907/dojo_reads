@@ -26,7 +26,11 @@ class UserManager(models.Manager):
             errors['pw_match'] = "Password must match!"
         return errors       
 
+# BookManager
+# AuthorManager
+# ReviewManager
 
+# Julio, Pablo, Sergio, Marcelo, Luisa, Luis, Alexis
 
 # MODELS CREATION
 class User(models.Model):

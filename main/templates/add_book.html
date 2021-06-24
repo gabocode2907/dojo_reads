@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADD A NEW BOOK</title>
+</head>
+<body>
+    <a href="/user/dashboard">HOME</a>
+    <a href="/user/logout">LOG OUT</a>
+
+    <h1>Add a new Book title and review! </h1>
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li>
+                {{message}}
+            </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <!-- CREATE BOOK FORM -->
+    <form action="/book/create" method="post">
+        {% csrf_token %}
+        <label for="title">Book title: </label>
+        <input type="text" name="title">
+        <br>
+        <label for="author">Author: </label>
+        <select name="author_dropdown">
+            <option value="-1"> Please choose an aouthor </option>
+            {% for author in authors %}
+            <option value="{{author.id}}">{{author.name}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        
+        <label for="author_name">Or add a new author</label>
+        <input type="text" name="author_name">
+        <br>
+
+        <label for="content">Review: </label>
+        <textarea name="content" cols="20" rows="3"></textarea>
+        <br>
+
+        <label for="raiting">Rating:</label>
+        <select name="rating">
+            <option value="1">1 Star</option>
+            <option value="2">2 Star</option>
+            <option value="3">3 Star</option>
+            <option value="4">4 Star</option>
+            <option value="5">5 Star</option>
+        </select>
+        <br>
+        <button>Create Book</button>
+    </form>
+</body>
+</html>

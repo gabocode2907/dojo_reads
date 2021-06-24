@@ -39,7 +39,7 @@
     <br>
 
     <label for="confirm_password">Please confirm your Password: </label>
-    <input type="confirm_password" name="confirm_password">
+    <input type="password" name="confirm_password">
     <br>
     <button>Create User/author</button>
 </form>
@@ -47,7 +47,7 @@
 <!-- LOGIN FORM -->
 <hr>
 <h1>Login Here!!</h1>
-<form>
+<form action="/user/login" method="post">
     {% csrf_token %}
     <label for="email">Email: </label>
     <input type="email" name="email">

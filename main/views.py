@@ -1,7 +1,7 @@
 import re
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from .models import User
+from .models import Book, Review, User
 import bcrypt
 
 # Create your views here.
@@ -50,12 +50,23 @@ def logout(request):
     request.session.flush()
     return redirect('/')
 
-# def dashboard(request):
+def dashboard(request):
+    # if (logged_user)
+
+    context = {
+        'logged_user' : User.objects.get(id=request.session['logged_user']),
+        'all_books' : Book.objects.all(),
+        'recent_reviews' : Review.objects.order_by('-created_at')[:3]
+    }
+    return render(request, 'dashboard.html', context)
+
 # def create_book(request):
 # def Book_form(request):
 # def show_book(request, book_id):
 # def add_review(request):
 # def user_page(request, user_id):
 # def delete_review(request, review_id):
+
+# Francisco, Santiago, Gabriel, Erick, Ivan, Jose Arevalo, 
 
 
