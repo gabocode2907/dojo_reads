@@ -51,8 +51,9 @@ def logout(request):
     return redirect('/')
 
 def dashboard(request):
-    # if (logged_user)
-
+    if "logged_user" not in request.session:
+        messages.error(request,"There is not logged user!! Log in first!")
+        return redirect('/')
     context = {
         'logged_user' : User.objects.get(id=request.session['logged_user']),
         'all_books' : Book.objects.all(),
